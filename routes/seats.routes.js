@@ -19,17 +19,21 @@ router.get('/seats/:id', (req, res) => {
 
 router.post('/seats', (req, res) => {
     const { day, seat, client, email } = req.body;
-    if (author && text) {
-        const newSeat = {
-            id: uuidv4(),
-            day,
-            seat,
-            client,
-            email
-
-        };
-        db.concerts.push(newSeat);
-        res.json({ message: 'OK' });
+    if (day && seat && client && email) {
+        const isSeatTaken = db.seats.some(item => item.day === day && item.seat === seat);
+        if (isSeatTaken) {
+            res.status(409).json({ message: 'The slot is already taken...' });
+        } else {
+            const newSeat = {
+                id: uuidv4(),
+                day,
+                seat,
+                client,
+                email
+            };
+            db.seats.push(newSeat);
+            res.json({ message: 'OK' });
+        }
     } else {
         res.status(400).json({ message: 'All fields are required' });
     }
@@ -39,10 +43,10 @@ router.put('/seats/:id', (req, res) => {
     const { day, seat, client, email } = req.body;
     const updatedSeat = db.seats.find(item => item.id == req.params.id);
     if (updatedSeat) {
-        if (day) seat.day = day;
-        if (seat) seat.seat = seat;
-        if (client) seat.client = client;
-        if (email) seat.email = email;
+        if (day) updatedSeat.day = day;
+        if (seat) updatedSeat.seat = seat;
+        if (client) updatedSeat.client = client;
+        if (email) updatedSeat.email = email;
         res.json({ message: 'OK' });
     } else {
         res.status(404).json({ message: 'Seat not found' });
@@ -55,7 +59,7 @@ router.delete('/seats/:id', (req, res) => {
         db.seats.splice(index, 1);
         res.json({ message: 'OK' });
     } else {
-        res.status(404).json({ message: 'Seats not found' });
+        res.status(404).json({ message: 'Seat not found' });
     }
 });
 
