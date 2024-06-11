@@ -3,7 +3,18 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const app = express();
 const db = require('./db');
+const socket = require('socket.io');
 const path = require('path')
+
+const server = app.listen(process.env.PORT || 8000, () => {
+    console.log('Server is running...');
+});
+  
+const io = socket(server);
+
+io.on('connection', (socket) => {
+    console.log('New socket!', socket.id);
+});  
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -26,9 +37,4 @@ app.get('*', (req, res) => {
 
 app.use((req, res, next) => {
     res.status(404).json({ message: 'Not found...' });
-});
-
-
-app.listen(process.env.PORT || 8000, () => {
-    console.log('Server is running on port: 8000');
 });
