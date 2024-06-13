@@ -1,10 +1,12 @@
-import { Button, Form, FormGroup, Label, Input, Row, Col, Alert, Progress } from 'reactstrap';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, Form, FormGroup, Label, Input, Row, Col, Alert, Progress } from 'reactstrap';
 import { addSeatRequest, getRequests, loadSeatsRequest } from '../../../redux/seatsRedux';
-
 import './OrderTicketForm.scss';
-import SeatChooser from './../SeatChooser/SeatChooser';
+import SeatChooser from '../SeatChooser/SeatChooser';
+import io from 'socket.io-client';
+
+const socket = io('ws://localhost:8000', { transports: ['websocket'] });
 
 const OrderTicketForm = () => {
   const dispatch = useDispatch();
@@ -36,7 +38,7 @@ const OrderTicketForm = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    if(order.client && order.email && order.day && order.seat) {
+    if (order.client && order.email && order.day && order.seat) {
       await dispatch(addSeatRequest(order));
       dispatch(loadSeatsRequest());
       setOrder({
