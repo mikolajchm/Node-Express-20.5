@@ -31,7 +31,9 @@ router.post('/seats', (req, res) => {
                 client,
                 email
             };
+
             db.seats.push(newSeat);
+            req.io.emit('seatsUpdated', db.seats);
             res.json({ message: 'OK' });
         }
     } else {

@@ -16,6 +16,11 @@ io.on('connection', (socket) => {
     console.log('New socket!', socket.id);
 });  
 
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+});
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());

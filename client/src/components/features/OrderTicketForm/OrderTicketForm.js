@@ -5,21 +5,12 @@ import {useEffect} from 'react';
 import { addSeatRequest, getRequests, loadSeatsRequest } from '../../../redux/seatsRedux';
 import './OrderTicketForm.scss';
 import SeatChooser from '../SeatChooser/SeatChooser';
-import io from 'socket.io-client';
+              
 
 const OrderTicketForm = () => {
   const dispatch = useDispatch();
   const requests = useSelector(getRequests);
   const [socket, setSocket] = useState();
-
-  useEffect(() => {
-    const socket = io('ws://localhost:8000', { transports: ['websocket'] });
-    setSocket(socket);
-
-    return () => {
-      socket.disconnect();
-    };
-}, []);
 
   const [order, setOrder] = useState({
     client: '',
