@@ -12,7 +12,7 @@ exports.getId = async (req, res) => {
     try {
         const cnt = await Concert.findById(req.params.id);
         if(!cnt)res.status(404).json({ message: 'Not found' });
-        else res.json(ctn);
+        else res.json(cnt);
     } catch (err) {
         res.status(500).json({ message: 'Concert not found' });
     }
@@ -26,7 +26,7 @@ exports.post = async (req, res) => {
         await newConcert.save();
         res.json({ message: 'OK'});
     } catch (err) {
-        res.status(500).json({ message: 'All fields are required' });
+        res.status(500).json({ message: err });
     }
 };
 

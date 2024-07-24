@@ -21,6 +21,10 @@ exports.getId = async (req, res) => {
 exports.getRandom = async (req, res) => {
     try {
         const count = await Testimonial.countDocuments();
+        if (count === 0) {
+            res.status(404).json({ message: 'No testimonials found' });
+            return;
+        }
         const rand = Math.floor(Math.random() * count);
         const test = await Testimonial.findOne().skip(rand);
         if(!test) res.status(404).json({ message: 'Not found' });
