@@ -1,8 +1,12 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
-const db = require('../db');
-
 const router = express.Router();
+const SeatController = require('../controllers/seats.controller');
+
+router.get('/seats', SeatController.getAll);
+router.get('/seats/:id', SeatController.getId);
+router.post('/seats', SeatController.post);
+router.put('/seats/:id', SeatController.putId);
+router.delete('/seats/:id', SeatController.delete);
 
 router.get('/seats', (req, res) => {
     res.json(db.seats);

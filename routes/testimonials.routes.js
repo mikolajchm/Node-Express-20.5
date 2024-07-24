@@ -1,8 +1,15 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
-const db = require('../db');
-
 const router = express.Router();
+const TestimonialController = require('../controllers/testimonials.controller');
+
+router.get('/testimonials', TestimonialController.getAll);
+router.get('/testimonials/:id', TestimonialController.getId);
+router.get('/testimonials/random', TestimonialController.getRandom);
+router.post('/testimonials', TestimonialController.post);
+router.put('/testimonials/:id', TestimonialController.putId);
+router.delete('testimonial/:id', TestimonialController.delete);
+
+
 
 router.get('/testimonials', (req, res) => {
     res.json(db.testimonials);
