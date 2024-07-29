@@ -36,8 +36,9 @@ app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
 
+const dbURL = 'mongodb+srv://cm:plaq@cluster0.ytgn9qg.mongodb.net/NewWaveDB?retryWrites=true&w=majority&appName=Cluster0'
 // Connects our backend code with the database
-mongoose.connect('mongodb://0.0.0.0:27017/NewWaveDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.on('error', (err) => {
