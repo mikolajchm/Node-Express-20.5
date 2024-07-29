@@ -4,8 +4,12 @@ const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 const socket = require('socket.io');
 const path = require('path');
+const helmet = require('helmet');
+
 
 const app = express();
+
+app.use(helmet());
 const server = app.listen(process.env.PORT || 8000, () => {
     console.log('Server is running...');
 });
@@ -36,7 +40,7 @@ app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
 
-const dbURL = 'mongodb+srv://cm:${process.env.DB_PASS}@cluster0.ytgn9qg.mongodb.net/NewWaveDB?retryWrites=true&w=majority&appName=Cluster0'
+const dbURL = 'mongodb+srv://cm:plaq@cluster0.ytgn9qg.mongodb.net/NewWaveDB?retryWrites=true&w=majority&appName=Cluster0'
 // Connects our backend code with the database
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
