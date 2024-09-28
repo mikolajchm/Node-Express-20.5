@@ -1,7 +1,30 @@
+import React, { useEffect } from 'react';
 import { Alert, Container } from 'reactstrap';
+import { API_URL } from '../../../config';
 
-const Prices = () => (
-  <Container>
+const Prices = () => {
+
+  useEffect(() => {
+
+    const fetchConcerts = async () => {
+      try {
+        const response = await fetch(`${API_URL}/concerts`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json(); 
+        console.log('data',data);
+      } catch (error) {
+        console.error('Error fetching concerts:', error);
+      }
+    };
+
+    fetchConcerts();
+  }, []);
+
+  
+  return (
+    <Container>
     <h1>Prices</h1>
     <p>Prices may differ according the day of the festival. Remember that ticket includes not only the star performance, but also 10+ workshops. We gathered several genre teachers to help you increase your vocal skills, as well as self confidence.</p>
     
@@ -19,6 +42,7 @@ const Prices = () => (
     <p>Price: 50$</p>
     <p>Workshops: "Increase your vocal range", "How to properly warmup before singing", "It's time for YOU!"</p>
   </Container>
-);
+  );
+};
 
 export default Prices;
