@@ -6,9 +6,9 @@ const db = {
     ],
 
     concerts: [
-        { id: 1, performer: 'John Doe', genre: 'Rock', price: 25, day: 1, image: '/img/uploads/1fsd324fsdg.jpg' },
-        { id: 2, performer: 'Rebekah Parker', genre: 'R&B', price: 25, day: 1, image: '/img/uploads/2f342s4fsdg.jpg' },
-        { id: 3, performer: 'Maybell Haley', genre: 'Pop', price: 40, day: 1, image: '/img/uploads/hdfh42sd213.jpg' },
+        { id: 1, performer: 'John Doe', genre: 'Rock', price: 25, day: 1, description: "Workshops: Rock Music Style How to make you voice grooowl Make your voice stronger History of Rock" , image: '/img/uploads/1fsd324fsdg.jpg' },
+        { id: 2, performer: 'Rebekah Parker', genre: 'R&B', price: 25, day: 2, description: "Workshops: Find your real tune, Find your real YOU, Fell the music, Jam session", image: '/img/uploads/2f342s4fsdg.jpg' },
+        { id: 3, performer: 'Maybell Haley', genre: 'Pop', price: 50, day: 3, description:"Workshops: Increase your vocal range, How to properly warmup before singing, It's time for YOU!" , image: '/img/uploads/hdfh42sd213.jpg' },
       ],
 
     seats: [
@@ -21,4 +21,4 @@ const db = {
     ]  
 };
 
-module.exports = db;
+module.exports = db; 

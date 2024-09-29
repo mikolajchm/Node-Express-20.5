@@ -5,6 +5,7 @@ const concertSchema = new mongoose.Schema({
   genre: { type: String, required: true },
   price: { type: Number, required: true },
   day: { type: Number, required: true },
+  description: {type: String, required: true },
   image: { type: String, required: true },
 });
 
